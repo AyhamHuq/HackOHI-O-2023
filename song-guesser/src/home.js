@@ -7,76 +7,42 @@ import {
 } from "./get_user_profile/src/authCodeWithPkce.ts";
 
 export const Home = () => {
-	const [code, setCode] = useState();
-
 	return (
 		<>
 			<Header />
 			<TextInput />
-			<Button
-				onClick={() => {
-					authenticate().then(() => {
-						console.log("fulfilled");
-					});
-				}}
-				text="x"
-			/>
-			<Button
-				onClick={() => {
-					loadPlaylist("37i9dQZF1DX0XUsuxWHRQd", code).then(
-						(json) => {
-							console.log(json);
-						}
-					);
-				}}
-				text="Submit"
-			/>
+			{/* <Button onClick={authenticate} text="x" /> */}
 			<Link to="/login">login</Link>
+			<Link to="/redirect">erccrceve</Link>
 		</>
 	);
 };
 
-const authenticate = async () => {
-	const clientId = "9e68d87c869748fc9865e953f83851e7";
-	const params = new URLSearchParams(window.location.search);
-	const code = params.get("code");
+// const authenticate = async () => {
+// 	const clientId = "8f9515b2738142f2b3472bcb86836042";
+// 	const params = new URLSearchParams(window.location.search);
+// 	console.log(window.location.search);
+// 	console.log(params);
+// 	const code = params.get("code");
 
-	if (!code) {
-		redirectToAuthCodeFlow(clientId);
-	} else {
-		const accessToken = await getAccessToken(clientId, code);
-		const profile = await fetchProfile(accessToken);
-		const result = await fetch(
-			"https://api.spotify.com/v1/playlists/37i9dQZF1EQqedj0y9Uwvu/tracks",
-			{
-				method: "GET",
-				headers: { Authorization: `Bearer ${code}` },
-			}
-		);
-		console.log(result);
-	}
-};
+// 	if (!code) {
+// 		console.log("!code");
+// 		redirectToAuthCodeFlow(clientId);
+// 	} else {
 
-async function fetchProfile(code) {
-	const result = await fetch("https://api.spotify.com/v1/me", {
-		method: "GET",
-		headers: { Authorization: `Bearer ${code}` },
-	});
-
-	return await result.json();
-}
-
-const loadPlaylist = async (playlistID, code) => {
-	console.log(code);
-	const result = await fetch(
-		`https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
-		{
-			method: "GET",
-			headers: { Authorization: `Bearer ${code}` },
-		}
-	);
-	return await result.json();
-};
+// 		console.log("code successful");
+// 		const accessToken = await getAccessToken(clientId, code);
+// 		const profile = await fetchProfile(accessToken);
+// 		const result = await fetch(
+// 			"https://api.spotify.com/v1/playlists/37i9dQZF1EQqedj0y9Uwvu/tracks",
+// 			{
+// 				method: "GET",
+// 				headers: { Authorization: `Bearer ${code}` },
+// 			}
+// 		);
+// 		console.log(result);
+// 	}
+// };
 
 const Header = () => {
 	return <h1>Welcome to Song Guesser!</h1>;
