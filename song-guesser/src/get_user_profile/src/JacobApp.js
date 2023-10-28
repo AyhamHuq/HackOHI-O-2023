@@ -1,8 +1,8 @@
 import logo from "src/logo.svg";
 import "src/App.css";
 import { Routes, Route, Link } from "react-router-dom";
-import Home from "src/pages/home";
-import Login from "src/pages/login";
+import Home from "src/home";
+import Login from "src/login";
 import { Component, createContext, useContext } from "react";
 import { redirectToAuthCodeFlow, getAccessToken } from "src/authCodeWithPkce";
 
