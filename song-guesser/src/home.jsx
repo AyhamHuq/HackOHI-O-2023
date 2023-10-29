@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 import "./App.css";
 import { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
+import "./player";
 import Login from "./login";
+import { keyboard } from "@testing-library/user-event/dist/keyboard";
 // import {
 //   redirectToAuthCodeFlow,
 //   getAccessToken,
 // } from "./get_user_profile/src/authCodeWithPkce";
+
 
 export const Home = () => {
   return (
@@ -93,12 +96,24 @@ const Header = () => {
   return <h1>Guess the song!</h1>;
 };
 
+const handleKeyPress = (e) =>
+{
+  let keycode = e.keyCode ? e.keyCode : e.which;
+  console.log(keycode)
+  if(keycode === 13)
+  {
+    checkAnswer(document.getElementById("input").value);
+    document.getElementById("input").value = "";
+  }
+}
+
 const TextInput = () => {
   return (
     <>
       <h2>Lorem ipsum dolor sit amet</h2>
       <div className="search-box">
-        <input type="url"></input>
+        <input type="text" onKeyDown={handleKeyPress} id="input" placeholder= ""></input>
+        <text>Test</text>
       </div>
     </>
   );

@@ -52,3 +52,12 @@ function playNextSong(player, set) {
   }
   return player.getCurrentState().track_window.current_track;
 }
+
+export function checkAnswer(answer){
+  if(currentSong.toLowerCase() === answer.toLowerCase()){
+    currentSong = playNextSong(player, songSet);
+  }
+}
+
+
+
