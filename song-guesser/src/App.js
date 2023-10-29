@@ -8,6 +8,8 @@ import { Component, createContext, useContext } from "react";
 
 export class App extends Component {
 	componentDidMount() {
+		
+
 		console.log("loaded");
 	}
 
